@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    microservice: foo-ms
+  name: foo-ms
+spec:
+  externalTrafficPolicy: Cluster
+  ports:
+    - nodePort: 31453
+      port: 8080
+      protocol: TCP
+      targetPort: 8080
+  selector:
+    microservice: foo-ms
+  sessionAffinity: None
+  type: LoadBalancer

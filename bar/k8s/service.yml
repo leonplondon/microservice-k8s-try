@@ -1,0 +1,16 @@
+# kubectl expose deployment foo-ms --type LoadBalancer --name foo-ms --port 8080 -o yaml
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    microservice: bar-ms
+  name: bar-ms
+spec:
+  ports:
+    - port: 8080
+      protocol: TCP
+      targetPort: 8080
+  selector:
+    microservice: bar-ms
+  sessionAffinity: None
+  type: ClusterIP

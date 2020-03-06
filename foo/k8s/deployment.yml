@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: foo-ms
+  labels:
+    microservice: foo-ms
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      microservice: foo-ms
+  template:
+    metadata:
+      labels:
+        microservice: foo-ms
+    spec:
+      containers:
+        - name: foo-ms
+          image: foo:latest
+          ports:
+            - containerPort: 8080
+          resources:
+            requests:
+              cpu: "0.1"
+              memory: "128Mi"
+            limits:
+              cpu: "0.5"
+              memory: "512Mi"
+          env:
+            - name: DB_HOST
+              valueFrom:
+                secretKeyRef:
+                  name: spring-properties
+                  key: postgres.host
+            - name: DB_PORT
+              valueFrom:
+                secretKeyRef:
+                  name: spring-properties
+                  key: postgres.port
