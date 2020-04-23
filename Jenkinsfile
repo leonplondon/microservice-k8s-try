@@ -5,7 +5,9 @@ pipeline {
   stages {
 
     stage("Build projects") {
+
       stages {
+
         stage("Build bar") {
           steps {
             dir("bar") {
@@ -13,13 +15,15 @@ pipeline {
             }
           }
         }
+
         stage("Build foo") {
           steps {
-            dir("for") {
+            dir("foo") {
               sh "./gradlew :clean :build"
             }
           }
         }
+
       }
     }
   }
