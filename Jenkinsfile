@@ -1,5 +1,4 @@
 pipeline {
-  checkout scm
 
   node {
     dir('bar') {
