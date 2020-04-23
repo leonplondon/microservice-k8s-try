@@ -1,16 +1,15 @@
 pipeline {
 
   stages {
-    stage {
-    node {
-            dir('bar') {
-              sh build: "./gradlew :clean :build"
-            }
 
-            dir('bar') {
-              sh build: "./gradlew :clean :build"
-            }
-          }
+    stage("build") {
+      steps {
+        dir('bar') {
+          sh build: "./gradlew :clean :build"
+        }
+      }
     }
+
   }
+
 }
