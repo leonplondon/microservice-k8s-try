@@ -9,7 +9,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        super.configure(http);
+        http
+            .authorizeRequests()
+            .antMatchers("/api/v1/echo").permitAll()
+            .anyRequest().authenticated()
+            .and()
+            .httpBasic();
+
 //        http
 //            .cors(corsConfigurer -> {
 //                CorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
